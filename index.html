@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kozzak | Saloon & Cocktail Bar, Lublin</title>
+<meta name="description" content="Kozzak Cocktail Bar — koktajle, pizza z pieca, bilard i lampy naftowe na Nadbystrzyckiej 20B w Lublinie. W piątki i soboty do 2:30.">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#16110d">
+<!-- CSP: tylko zasoby lokalne + jawna lista hostów (czcionki Google, ramka Google Maps). Skrypt jest przypięty hashem SHA-256:
+     po KAŻDEJ zmianie w <script> przelicz go poleceniem z pliku SECURITY.md, inaczej przeglądarka odmówi uruchomienia JS. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'sha256-4TsYTGCootfHZFl2xsWeGIN6nILHLqaUmD5QC2bnJCQ='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; frame-src https://maps.google.com https://www.google.com; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Rye&family=Oswald:wght@400;500;600&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%2316110d'/%3E%3Cpath d='M32 8l6.5 16.6L56 26l-13.5 11.4L46.8 56 32 46.4 17.2 56l4.3-18.6L8 26l17.5-1.4z' fill='%23e9a53b'/%3E%3C/svg%3E">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --ink:#16110d; --stone:#1c1610; --stone-2:#251d16; --stone-3:#2f261e;
+  --paper:#ecdfc4; --paper-2:#e4d4b4; --paper-3:#d6c39c; --cream:#f6eddb;
+  --amber:#e9a53b; --amber-2:#f4c46e; --whisky:#b86a24; --rust:#9a3a20; --red:#a5281a;
+  --ink-soft:#4b3b2c; --ink-mute:#7a6650; --line:rgba(22,17,13,.22); --line-dark:rgba(246,237,219,.12);
+  --wood:'Rye',serif; --slab:'Alfa Slab One',serif; --cond:'Oswald',sans-serif; --body:'Lora',Georgia,serif;
+  --wrap:1180px; --gut:clamp(16px,4vw,40px);
+  --ease:cubic-bezier(.22,.8,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--stone);color:var(--paper);font-family:var(--body);font-size:17px;line-height:1.65;overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--amber);color:var(--ink)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+.wrap{width:min(var(--wrap),100% - 2*var(--gut));margin-inline:auto}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* textures */
+.paper,.dark{position:relative;isolation:isolate}
+/* Section edges: each boundary blends across two zones (the last --fade of one section and the first --fade of the next)
+   with a smoothstep profile, so paper dissolves into the photo wall - or into the other paper shade - without a visible seam. */
+:root{--fade:clamp(72px,10vw,128px)}
+.paper{--bg:var(--paper);--c:236,223,196;color:var(--ink);
+  --zt:linear-gradient(var(--bg),var(--bg));--zb:linear-gradient(var(--bg),var(--bg));
+  background:var(--zt) top/100% var(--fade) no-repeat,var(--zb) bottom/100% var(--fade) no-repeat,linear-gradient(var(--bg),var(--bg)) center/100% calc(100% - 2*var(--fade) + 2px) no-repeat}
+.paper.p3{--bg:var(--paper-3);--c:214,195,156}
+/* paper -> photo (upper half of the S: opaque to 50%) */
+.paper.fade-b{--mb:transparent;--zb:linear-gradient(to bottom,rgba(var(--c),1) 0,rgba(var(--c),.955) 25%,rgba(var(--c),.844) 50%,rgba(var(--c),.68) 75%,rgba(var(--c),.5) 100%)}
+.paper.fade-t{--mt:transparent;--zt:linear-gradient(to bottom,rgba(var(--c),.5) 0,rgba(var(--c),.68) 25%,rgba(var(--c),.844) 50%,rgba(var(--c),.955) 75%,rgba(var(--c),1) 100%)}
+/* photo -> paper (lower half of the S: 50% to transparent), painted by the dark section itself */
+.dark{--zt:none;--zb:none;background:var(--zt) top/100% var(--fade) no-repeat,var(--zb) bottom/100% var(--fade) no-repeat}
+.dark.veil-t{--zt:linear-gradient(to bottom,rgba(var(--vct),.5) 0,rgba(var(--vct),.32) 25%,rgba(var(--vct),.156) 50%,rgba(var(--vct),.045) 75%,rgba(var(--vct),0) 100%)}
+.dark.veil-b{--zb:linear-gradient(to bottom,rgba(var(--vcb),0) 0,rgba(var(--vcb),.045) 25%,rgba(var(--vcb),.156) 50%,rgba(var(--vcb),.32) 75%,rgba(var(--vcb),.5) 100%)}
+/* paper <-> darker paper: the two shades meet halfway (#e1d1b0), each side eased */
+.paper.to-p3{--zb:linear-gradient(to bottom,#ecdfc4 0,#eaddc1 25%,#e7d8ba 50%,#e3d3b3 75%,#e1d1b0 100%)}
+.paper.from-paper{--zt:linear-gradient(to bottom,#e1d1b0 0,#dfcfad 25%,#dbcba6 50%,#d8c79f 75%,#d6c39c 100%)}
+.paper.to-paper{--zb:linear-gradient(to bottom,#d6c39c 0,#d8c79f 25%,#dbcba6 50%,#dfcfad 75%,#e1d1b0 100%)}
+.paper.from-p3{--zt:linear-gradient(to bottom,#e1d1b0 0,#e3d3b3 25%,#e7d8ba 50%,#eaddc1 75%,#ecdfc4 100%)}
+.paper::before{-webkit-mask-image:linear-gradient(to bottom,var(--mt,#000) 0,#000 var(--fade),#000 calc(100% - var(--fade)),var(--mb,#000) 100%);mask-image:linear-gradient(to bottom,var(--mt,#000) 0,#000 var(--fade),#000 calc(100% - var(--fade)),var(--mb,#000) 100%)}
+.paper::after{-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%);mask-image:linear-gradient(to bottom,transparent 0,#000 var(--fade),#000 calc(100% - var(--fade)),transparent 100%)}
+.paper::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.55;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.paper::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  background:radial-gradient(120% 80% at 50% 0%,transparent 40%,rgba(90,60,25,.16) 100%)}
+.dark{color:var(--paper)}
+/* photo wall: fixed, crossfading, visible only through the dark sections */
+.photowall{position:fixed;inset:0;height:100lvh;z-index:-1;background:var(--stone);overflow:hidden;pointer-events:none}
+.photowall img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 45%;opacity:0;
+  transition:opacity 2.5s ease-in-out;filter:sepia(.7) saturate(.55) brightness(.44) contrast(1.06)}
+.photowall img.on{opacity:1}
+.photowall::after{content:"";position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.6' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .9 0 0 0 0 .7 0 0 0 0 .45 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),radial-gradient(80% 80% at 50% 40%,rgba(28,22,16,.36) 0%,rgba(28,22,16,.66) 65%,rgba(28,22,16,.87) 100%)}
+footer.dark{background:rgba(22,17,13,.72)}
+
+/* lamp that follows the pointer over dark sections */
+/* two glows in one element: warm light over the photo wall, a soft shadow over paper; they crossfade */
+.lamp{position:fixed;left:0;top:0;width:520px;height:520px;margin:-260px 0 0 -260px;pointer-events:none;z-index:1;will-change:transform}
+.lamp i{position:absolute;inset:0;border-radius:50%;opacity:0;transition:opacity .7s var(--ease)}
+.lamp .warm{background:radial-gradient(circle,rgba(246,206,128,.46) 0%,rgba(236,170,66,.20) 26%,rgba(233,165,59,0) 60%);mix-blend-mode:screen}
+.lamp .dim{background:radial-gradient(circle,rgba(22,17,13,.42) 0%,rgba(22,17,13,.16) 28%,rgba(22,17,13,0) 60%);mix-blend-mode:multiply}
+.lamp.on-dark .warm{opacity:1}
+.lamp.on-paper .dim{opacity:1}
+
+/* ---------- type helpers ---------- */
+.eyebrow{font-family:var(--wood);font-size:clamp(13px,1.3vw,16px);letter-spacing:.12em;text-transform:uppercase;color:var(--rust)}
+.dark .eyebrow{color:var(--amber)}
+.title{font-family:var(--slab);font-weight:400;line-height:1.02;letter-spacing:.01em;text-transform:uppercase;font-size:clamp(44px,7.5vw,96px);margin:.35em 0 .3em}
+.sub{font-size:clamp(17px,1.4vw,20px);max-width:60ch;color:var(--ink-soft)}
+.dark .sub{color:rgba(246,237,219,.78)}
+.sec-head{text-align:center;margin-bottom:clamp(36px,6vw,64px)}
+.sec-head .sub{margin-inline:auto}
+.rule{display:flex;align-items:center;gap:14px;color:var(--rust);font-size:14px;margin:18px auto;max-width:360px}
+.rule::before,.rule::after{content:"";flex:1;height:1px;background:currentColor;opacity:.6}
+.dark .rule{color:var(--amber)}
+section{padding:clamp(72px,10vw,128px) 0}
+
+/* ---------- buttons ---------- */
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.14em;text-transform:uppercase;
+  padding:15px 26px;text-decoration:none;border:2px solid var(--ink);color:var(--ink);background:var(--amber);
+  box-shadow:4px 4px 0 var(--ink);transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s}
+.btn:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 var(--ink);background:var(--amber-2)}
+.btn:active{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.ghost:hover{background:rgba(22,17,13,.06)}
+.dark .btn.ghost{color:var(--paper);border-color:var(--paper);box-shadow:4px 4px 0 rgba(246,237,219,.25)}
+.dark .btn.ghost:hover{background:rgba(246,237,219,.06);box-shadow:6px 6px 0 rgba(246,237,219,.25)}
+.dark .btn:not(.ghost){border-color:var(--ink);box-shadow:4px 4px 0 rgba(0,0,0,.6)}
+.btn svg{width:18px;height:18px}
+
+/* demo tag (remove at handover together with noindex) */
+.demo-tag{position:fixed;left:14px;bottom:14px;z-index:40;font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;background:var(--amber);color:var(--ink);border:1.5px solid var(--ink);padding:6px 10px;box-shadow:3px 3px 0 var(--ink);pointer-events:none}
+
+/* ---------- nav ---------- */
+.nav{position:fixed;inset:0 0 auto 0;z-index:50;padding:14px 0;transition:background .35s,box-shadow .35s,padding .35s}
+.nav.solid{background:var(--ink);box-shadow:0 1px 0 var(--line-dark);padding:8px 0}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--slab);font-size:24px;letter-spacing:.04em;color:var(--paper)}
+.brand .star{width:18px;height:18px;color:var(--amber)}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:var(--cond);font-size:14px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:rgba(246,237,219,.8);position:relative;padding:6px 0}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--amber);transition:right .25s var(--ease)}
+.nav-links a:hover::after{right:0}
+.nav-links a:hover{color:var(--paper)}
+.nav-cta{display:inline-flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:600;letter-spacing:.1em;font-size:14px;text-decoration:none;color:var(--ink);background:var(--amber);padding:10px 16px;border:2px solid var(--ink);box-shadow:3px 3px 0 rgba(0,0,0,.5)}
+.nav-cta svg{width:16px;height:16px}
+.m-only{display:none}
+.burger{display:none;width:44px;height:44px;place-items:center;color:var(--paper)}
+.burger span{display:block;width:24px;height:2px;background:currentColor;position:relative;transition:background .2s}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:24px;height:2px;background:currentColor;transition:transform .25s var(--ease),top .25s var(--ease)}
+.burger span::before{top:-7px}.burger span::after{top:7px}
+.nav.open .burger span{background:transparent}
+.nav.open .burger span::before{top:0;transform:rotate(45deg)}
+.nav.open .burger span::after{top:0;transform:rotate(-45deg)}
+@media (max-width:900px){
+  .nav-links{position:fixed;inset:0;height:100dvh;overflow:hidden;background:var(--paper);color:var(--ink);flex-direction:column;justify-content:center;align-items:center;gap:8px;
+    transform:translateY(-100%);visibility:hidden;transition:transform .45s var(--ease),visibility 0s .45s;z-index:-1}
+  .nav.open .nav-links{transform:none;visibility:visible;transition:transform .45s var(--ease),visibility 0s}
+  .nav-links a{color:var(--ink);font-family:var(--slab);font-size:clamp(28px,8vw,44px);letter-spacing:.04em;padding:10px}
+  .nav-links a::after{background:var(--rust)}
+  .nav.open .brand{color:var(--ink)}
+  .nav.open .burger{color:var(--ink)}
+  .burger{display:grid}
+  .nav-cta{display:none}
+  .m-only{display:block;margin-top:18px}
+  .nav-links a.m-tel{font-family:var(--cond);font-weight:600;font-size:16px;letter-spacing:.14em;background:var(--amber);border:2px solid var(--ink);padding:12px 22px;box-shadow:4px 4px 0 var(--ink)}
+  .nav-links a.m-tel::after{display:none}
+}
+
+/* ---------- hero ---------- */
+.hero{min-height:100svh;display:grid;place-items:center;padding:120px 0 72px;overflow:hidden}
+.hero .ghost-word{position:absolute;left:50%;top:9%;transform:translateX(-50%);font-family:var(--wood);font-size:clamp(90px,22vw,320px);line-height:1;color:rgba(246,237,219,.05);letter-spacing:.06em;pointer-events:none;user-select:none;white-space:nowrap;z-index:1}
+.poster{position:relative;z-index:2;width:min(760px,100%);margin-inline:auto;container-type:inline-size;background:var(--paper-2);color:var(--ink);text-align:center;
+  padding:clamp(34px,5vw,56px) clamp(22px,5vw,56px);
+  border:2px solid var(--ink);
+  box-shadow:inset 0 0 0 7px var(--paper-2),inset 0 0 0 9px var(--ink),0 40px 80px rgba(0,0,0,.6),0 10px 24px rgba(0,0,0,.4);
+  transform:rotate(-.7deg)}
+.poster::before{content:"";position:absolute;inset:0;z-index:-1;opacity:.5;mix-blend-mode:multiply;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.poster::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(100% 100% at 50% 50%,transparent 55%,rgba(90,60,25,.22) 100%)}
+.nail{position:absolute;width:11px;height:11px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#cfc7b6,#5c5248 55%,#26211c);box-shadow:0 1px 2px rgba(0,0,0,.7),0 0 0 2px rgba(0,0,0,.08);z-index:3}
+.nail.tl{left:16px;top:16px}.nail.tr{right:16px;top:16px}.nail.bl{left:16px;bottom:16px}.nail.br{right:16px;bottom:16px}
+.poster .eyebrow{display:flex;align-items:center;justify-content:center;gap:12px;color:var(--rust);text-wrap:balance}
+.poster .eyebrow::before,.poster .eyebrow::after{content:"";width:clamp(20px,6vw,60px);height:2px;background:var(--rust)}
+.wordmark{font-family:var(--slab);font-size:clamp(52px,19cqw,124px);line-height:.9;letter-spacing:.02em;margin:.12em 0 .05em;color:var(--ink);
+  text-shadow:0 0 0 transparent}
+.motion .wordmark{animation:lamp 7s ease-in-out infinite}
+@keyframes lamp{
+  0%,100%{text-shadow:0 0 0 rgba(233,165,59,0)}
+  8%{text-shadow:0 0 18px rgba(233,165,59,.35)}
+  11%{text-shadow:0 0 4px rgba(233,165,59,.12)}
+  14%{text-shadow:0 0 22px rgba(233,165,59,.4)}
+  50%{text-shadow:0 0 10px rgba(233,165,59,.2)}
+  63%{text-shadow:0 0 26px rgba(233,165,59,.42)}
+  66%{text-shadow:0 0 6px rgba(233,165,59,.15)}
+}
+.poster .tag{font-family:var(--cond);font-weight:500;font-size:clamp(14px,2vw,20px);letter-spacing:.28em;text-transform:uppercase;color:var(--ink-soft);text-wrap:balance}
+.poster .lead{font-size:clamp(16px,1.5vw,19px);max-width:46ch;margin:22px auto 0;color:var(--ink-soft)}
+.status{display:inline-flex;align-items:center;gap:10px;margin:26px auto 0;padding:9px 16px 9px 12px;font-family:var(--cond);font-weight:500;font-size:14px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);background:var(--cream);color:var(--ink)}
+.status .dot{width:10px;height:10px;border-radius:50%;background:#8a8a8a;box-shadow:0 0 0 3px rgba(0,0,0,.06)}
+.status.open .dot{background:#2f8f4e;box-shadow:0 0 0 3px rgba(47,143,78,.18)}
+.motion .status.open .dot{animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px rgba(47,143,78,0)}}
+.status.closed .dot{background:var(--red)}
+.poster .cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:28px}
+.poster .foot{margin-top:28px;padding-top:16px;border-top:1px solid var(--line);font-family:var(--cond);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute)}
+@media (max-width:600px){.poster{transform:none}.poster .foot{letter-spacing:.1em}.poster .eyebrow{font-size:12px;letter-spacing:.08em}.poster .eyebrow::before,.poster .eyebrow::after{width:14px}.poster .tag{letter-spacing:.16em}}
+
+/* ticker */
+.ticker{background:var(--amber);color:var(--ink);border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);overflow:hidden;position:relative;z-index:2}
+.ticker-track{display:flex;width:max-content;font-family:var(--cond);font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;padding:12px 0}
+.ticker-track span{padding:0 22px;white-space:nowrap}
+.ticker-track span::before{content:"★";margin-right:22px;color:var(--rust)}
+.motion .ticker-track{animation:tick 40s linear infinite}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv[data-d="1"]{transition-delay:.1s}.rv[data-d="2"]{transition-delay:.2s}.rv[data-d="3"]{transition-delay:.3s}
+
+/* ---------- reasons ---------- */
+.reasons{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.stub{position:relative;background:var(--cream);border:2px solid var(--ink);padding:28px 26px 26px 34px;box-shadow:5px 5px 0 var(--ink)}
+.stub::before{content:"";position:absolute;left:14px;top:12px;bottom:12px;border-left:2px dashed var(--line)}
+.stub .num{font-family:var(--slab);font-size:clamp(48px,5vw,66px);line-height:1;color:var(--rust)}
+.stub .num small{font-family:var(--cond);font-weight:500;font-size:.34em;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-left:6px;vertical-align:middle}
+.stub h3{font-family:var(--cond);font-weight:600;letter-spacing:.14em;text-transform:uppercase;font-size:15px;margin:12px 0 8px}
+.stub p{color:var(--ink-soft);font-size:16px}
+@media (max-width:860px){.reasons{grid-template-columns:1fr;max-width:520px;margin-inline:auto}}
+
+/* ---------- wanted ---------- */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:-16px 0 44px}
+.chip{font-family:var(--cond);font-weight:500;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:9px 16px;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:background .2s,color .2s}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.chip:hover{background:rgba(22,17,13,.08)}
+.chip[aria-pressed="true"]:hover{background:var(--ink)}
+.wall{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(22px,3.5vw,44px) clamp(18px,3vw,36px);padding:0 clamp(0px,2vw,20px)}
+.wp{position:relative;background:var(--paper-2);color:var(--ink);border:2px solid var(--ink);padding:26px 22px 22px;text-align:center;
+  box-shadow:inset 0 0 0 5px var(--paper-2),inset 0 0 0 6.5px var(--ink),0 18px 34px rgba(40,25,10,.28);
+  transform:rotate(var(--tilt,0deg));transition:transform .45s var(--ease),box-shadow .45s var(--ease),opacity .4s,scale .4s}
+.wp:hover,.wp:focus-within{transform:rotate(0) translateY(-8px);box-shadow:inset 0 0 0 5px var(--paper-2),inset 0 0 0 6.5px var(--ink),0 30px 50px rgba(40,25,10,.38)}
+.wp.hide{display:none}
+.wp.rv.in{transform:rotate(var(--tilt,0deg))}
+.wp.rv.in:hover,.wp.rv.in:focus-within{transform:rotate(0) translateY(-8px)}
+.wp::before{content:"";position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.wp .nail{left:50%;top:-6px;transform:translateX(-50%)}
+.wp .w{font-family:var(--slab);font-size:clamp(34px,3.6vw,46px);letter-spacing:.14em;line-height:1;color:var(--ink);padding:6px 0 10px;border-bottom:2px solid var(--ink)}
+.wp .w small{display:block;font-family:var(--cond);font-weight:500;font-size:11px;letter-spacing:.32em;color:var(--rust);margin-bottom:4px}
+.wp .art{height:118px;display:grid;place-items:center;margin:14px 0 6px;color:var(--ink)}
+.wp .art svg{height:100px;width:auto;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wp h3{font-family:var(--cond);font-weight:600;font-size:clamp(22px,2vw,26px);letter-spacing:.06em;text-transform:uppercase;line-height:1.1}
+.wp .charge{font-style:italic;color:var(--rust);margin:8px 0 10px;font-size:15.5px}
+.wp .desc{font-family:var(--cond);font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:10px 0}
+.wp .reward{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-top:14px}
+.wp .reward span{font-family:var(--wood);font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--rust)}
+.wp .reward b{font-family:var(--slab);font-weight:400;font-size:30px;line-height:1}
+.wp .badge{position:absolute;right:-14px;top:8px;transform:rotate(9deg);font-family:var(--cond);font-weight:600;font-size:11px;letter-spacing:.18em;text-transform:uppercase;background:var(--rust);color:var(--cream);padding:5px 10px;border:1.5px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.also{margin-top:clamp(36px,5vw,56px);text-align:center;font-family:var(--cond);font-size:14px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.also b{color:var(--ink);font-weight:600}
+@media (max-width:980px){.wall{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.wall{grid-template-columns:1fr;max-width:400px;margin-inline:auto;gap:34px}}
+
+/* ---------- wheel ---------- */
+.wheel-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(32px,5vw,72px);align-items:center}
+.wheel-box{position:relative;width:min(560px,100%);margin-inline:auto;aspect-ratio:1;filter:drop-shadow(0 30px 40px rgba(0,0,0,.55))}
+.wheel-box svg{width:100%;height:100%;overflow:visible}
+#wheel-g{transform-box:fill-box;transform-origin:center;transition:transform 4.8s cubic-bezier(.12,.78,.16,1)}
+.rm #wheel-g{transition-duration:.5s}
+.wheel-box .seg-label{font-family:var(--cond);font-weight:600;font-size:21px;letter-spacing:.06em;text-transform:uppercase;fill:var(--ink)}
+.wheel-box .seg-label.light{fill:var(--cream)}
+.wheel-side{text-align:left}
+.wheel-side .title{font-size:clamp(40px,5.2vw,70px)}
+.wheel-side .sub{margin-bottom:26px}
+.result{margin-top:26px;background:var(--paper-2);color:var(--ink);border:2px solid var(--ink);box-shadow:inset 0 0 0 5px var(--paper-2),inset 0 0 0 6.5px var(--ink),8px 8px 0 rgba(0,0,0,.5);padding:26px 24px;
+  opacity:0;transform:translateY(12px) rotate(-1deg);transition:opacity .5s var(--ease),transform .5s var(--ease);position:relative}
+.result.show{opacity:1;transform:none}
+.result::before{content:"";position:absolute;inset:0;opacity:.45;mix-blend-mode:multiply;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.result .k{font-family:var(--wood);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--rust)}
+.result h3{font-family:var(--slab);font-weight:400;font-size:clamp(26px,3vw,36px);line-height:1.05;margin:6px 0 8px;text-transform:uppercase}
+.result .q{font-style:italic;color:var(--rust)}
+.result .d{font-family:var(--cond);font-size:13.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-mute);margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.result .p{font-family:var(--slab);font-size:26px;margin-top:8px}
+@media (max-width:900px){.wheel-grid{grid-template-columns:1fr}.wheel-side{text-align:center}.wheel-side .sub{margin-inline:auto}}
+
+/* ---------- kitchen ---------- */
+.board{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);background:var(--cream);box-shadow:8px 8px 0 var(--ink)}
+.board > div{padding:30px 28px 28px;border-right:2px solid var(--ink)}
+.board > div:last-child{border-right:0}
+.board h3{font-family:var(--slab);font-weight:400;font-size:clamp(26px,2.6vw,32px);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px}
+.board .hint{font-style:italic;color:var(--ink-mute);font-size:15px;margin-bottom:18px}
+.board ul{list-style:none}
+.board li{display:flex;align-items:baseline;gap:10px;padding:9px 0;font-family:var(--cond);font-size:16px;letter-spacing:.04em}
+.board li .n{font-weight:500}
+.board li .l{flex:1;border-bottom:2px dotted var(--ink-mute);transform:translateY(-5px);opacity:.6}
+.board li .p{font-family:var(--slab);font-size:17px}
+.board li .tag{font-family:var(--cond);font-size:10px;letter-spacing:.2em;text-transform:uppercase;background:var(--rust);color:var(--cream);padding:2px 6px;margin-left:2px}
+@media (max-width:900px){.board{grid-template-columns:1fr}.board > div{border-right:0;border-bottom:2px solid var(--ink)}.board > div:last-child{border-bottom:0}}
+
+/* ---------- polaroids ---------- */
+.pols{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,52px) clamp(18px,3vw,40px);align-items:start;padding:0 clamp(0px,2vw,24px)}
+.pol{position:relative;margin:0;background:var(--cream);padding:12px 12px 48px;box-shadow:0 14px 30px rgba(40,25,10,.32),0 2px 4px rgba(0,0,0,.18);transform:rotate(var(--tilt,0deg));transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.pol.rv.in{transform:rotate(var(--tilt,0deg))}
+.pol:hover,.pol.on,.pol.rv.in:hover,.pol.rv.in.on{transform:rotate(0) translateY(-8px) scale(1.02);box-shadow:0 28px 50px rgba(40,25,10,.42),0 2px 4px rgba(0,0,0,.18);z-index:3}
+.pol .ph{overflow:hidden;background:var(--stone);aspect-ratio:1}
+.pol.l .ph{aspect-ratio:4/3}.pol.p .ph{aspect-ratio:4/5}
+.pol img{width:100%;height:100%;object-fit:cover;transition:transform .7s var(--ease)}
+.pol:hover img,.pol.on img{transform:scale(1.03)}
+.pol figcaption{position:absolute;left:12px;right:12px;bottom:13px;text-align:center;font-style:italic;font-size:16px;color:var(--ink-soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pin{position:absolute;left:50%;top:-9px;transform:translateX(-50%);width:17px;height:17px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e46a50,#8f2616 58%,#4a1008);box-shadow:0 3px 5px rgba(0,0,0,.5),0 0 0 1px rgba(0,0,0,.2);z-index:2}
+.pols .pol:nth-child(2){margin-top:38px}.pols .pol:nth-child(4){margin-top:-14px}.pols .pol:nth-child(6){margin-top:26px}
+.gal-more{text-align:center;margin-top:clamp(40px,6vw,64px);font-family:var(--cond);letter-spacing:.14em;text-transform:uppercase;font-size:14px}
+.gal-more a{text-decoration:none;color:var(--rust);border-bottom:2px solid var(--rust);padding-bottom:3px}
+@media (max-width:900px){.pols{grid-template-columns:repeat(2,1fr)}.pols .pol:nth-child(n){margin-top:0}.pols .pol:nth-child(even){margin-top:30px}}
+@media (max-width:520px){.pols{grid-template-columns:1fr;max-width:340px;margin-inline:auto;gap:40px}.pols .pol:nth-child(n){margin-top:0}}
+
+/* kitchen polaroid pinned to the board */
+.board-wrap{position:relative}
+.kpol{position:absolute;right:26px;bottom:-48px;width:min(300px,30%);z-index:2}
+.board > div:last-child{padding-bottom:240px}
+@media (max-width:900px){.kpol{position:static;width:min(320px,100%);margin:40px auto 0}.board > div:last-child{padding-bottom:28px}}
+
+/* ---------- evening ---------- */
+.evening{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line-dark)}
+.ev{padding:34px 30px;border-right:1px solid var(--line-dark);border-bottom:1px solid var(--line-dark);position:relative;transition:background .3s}
+.ev:hover{background:rgba(233,165,59,.06)}
+.ev:nth-child(3n){border-right:0}
+.ev:nth-last-child(-n+3){border-bottom:0}
+.ev .i{font-family:var(--wood);color:var(--amber);font-size:14px;letter-spacing:.18em}
+.ev svg{width:44px;height:44px;stroke:var(--amber);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin:16px 0 14px}
+.ev h3{font-family:var(--cond);font-weight:600;font-size:22px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+.ev p{color:rgba(246,237,219,.7);font-size:16px}
+@media (max-width:900px){.evening{grid-template-columns:repeat(2,1fr)}.ev:nth-child(3n){border-right:1px solid var(--line-dark)}.ev:nth-child(2n){border-right:0}.ev:nth-last-child(-n+3){border-bottom:1px solid var(--line-dark)}.ev:nth-last-child(-n+2){border-bottom:0}}
+@media (max-width:560px){.evening{grid-template-columns:1fr}.ev{border-right:0!important;border-bottom:1px solid var(--line-dark)!important}.ev:last-child{border-bottom:0!important}}
+
+/* ---------- events ticket ---------- */
+.ticket{display:grid;grid-template-columns:200px 1fr;background:var(--cream);border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);overflow:hidden}
+.ticket .stubcol{position:relative;background:var(--rust);color:var(--cream);display:grid;place-items:center;padding:30px 18px;border-right:2px dashed var(--ink)}
+.ticket .stubcol img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 60%;filter:sepia(.65) saturate(.6) brightness(.55);transition:filter .7s var(--ease)}
+.ticket:hover .stubcol img,.ticket.on .stubcol img{filter:none}
+.ticket .stubcol .v{position:relative;z-index:1;text-shadow:0 2px 10px rgba(0,0,0,.7)}
+.ticket .stubcol .v{writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--slab);font-size:clamp(26px,3vw,40px);letter-spacing:.14em;text-transform:uppercase;line-height:1}
+.ticket .stubcol::before,.ticket .stubcol::after{content:"";position:absolute;right:-12px;width:22px;height:22px;border-radius:50%;background:var(--paper);border:2px solid var(--ink)}
+.ticket .stubcol::before{top:-12px}.ticket .stubcol::after{bottom:-12px}
+.ticket .body{padding:clamp(28px,4vw,48px)}
+.ticket .body .title{font-size:clamp(36px,4.6vw,64px);margin:.25em 0 .25em}
+.ticket .body p{max-width:62ch;color:var(--ink-soft)}
+.ticket .list{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 26px}
+.ticket .list span{font-family:var(--cond);font-size:13px;letter-spacing:.12em;text-transform:uppercase;border:1.5px solid var(--ink);padding:6px 12px}
+.ticket .cta{display:flex;flex-wrap:wrap;gap:14px}
+@media (max-width:700px){.ticket{grid-template-columns:1fr}.ticket .stubcol{border-right:0;border-bottom:2px dashed var(--ink);padding:18px;min-height:190px}.ticket .stubcol .v{writing-mode:horizontal-tb;transform:none}.ticket .stubcol::before,.ticket .stubcol::after{display:none}}
+
+/* ---------- reviews ---------- */
+.score{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:40px;font-family:var(--cond);letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:rgba(246,237,219,.75)}
+.score b{font-family:var(--slab);font-weight:400;font-size:56px;line-height:1;color:var(--amber);letter-spacing:0}
+.score .stars{color:var(--amber);letter-spacing:.1em;font-size:20px}
+.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.tele{background:var(--cream);color:var(--ink);border:2px solid var(--ink);padding:0 0 22px;box-shadow:6px 6px 0 rgba(0,0,0,.55);position:relative;transform:rotate(var(--tilt,0deg))}
+.tele.rv.in{transform:rotate(var(--tilt,0deg))}
+.tele .head{display:flex;justify-content:space-between;align-items:center;font-family:var(--cond);font-size:11px;letter-spacing:.24em;text-transform:uppercase;padding:12px 18px;border-bottom:2px solid var(--ink);background:var(--paper-3)}
+.tele .head b{font-weight:600}
+.tele blockquote{position:relative;padding:26px 22px 8px 44px;font-size:17px;font-style:italic;line-height:1.55}
+.tele blockquote::before{content:"”";position:absolute;left:14px;top:18px;font-family:var(--body);font-style:normal;font-size:60px;line-height:.6;color:var(--rust);opacity:.6}
+.tele .who{padding:0 22px 0 44px;font-family:var(--cond);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-mute)}
+.tele .who .s{color:var(--rust);margin-right:8px}
+.rev-more{text-align:center;margin-top:36px}
+.rev-more a{font-family:var(--cond);letter-spacing:.14em;text-transform:uppercase;font-size:14px;color:var(--amber);text-decoration:none;border-bottom:2px solid var(--amber);padding-bottom:3px}
+@media (max-width:900px){.tg{grid-template-columns:1fr;max-width:520px;margin-inline:auto}}
+
+/* ---------- visit ---------- */
+.visit{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,64px);align-items:stretch}
+.visit .title{font-size:clamp(44px,6vw,84px)}
+.hours{list-style:none;border-top:2px solid var(--ink);margin-top:18px}
+.hours li{display:flex;justify-content:space-between;align-items:center;padding:12px 6px;border-bottom:1px solid var(--line);font-family:var(--cond);font-size:16px;letter-spacing:.08em;text-transform:uppercase}
+.hours li .h{font-weight:500}
+.hours li.off .h{color:var(--ink-mute)}
+.hours li.today{background:var(--amber);margin:0 -6px;padding-inline:12px;font-weight:600;border-bottom-color:var(--ink)}
+.hours li.today::after{content:"dziś";font-size:10px;letter-spacing:.2em;background:var(--ink);color:var(--paper);padding:2px 7px;margin-left:10px}
+.hours li.today{display:grid;grid-template-columns:1fr auto auto}
+.addr{margin-top:28px;display:grid;gap:14px}
+.addr .row{display:flex;gap:14px;align-items:flex-start}
+.addr svg{width:22px;height:22px;flex:none;stroke:var(--rust);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:3px}
+.addr a{text-decoration:none;border-bottom:1.5px solid var(--line);transition:border-color .2s}
+.addr a:hover{border-color:var(--rust)}
+.addr .lbl{display:block;font-family:var(--cond);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-mute)}
+.map{border:2px solid var(--ink);box-shadow:8px 8px 0 var(--ink);min-height:520px;background:var(--paper-3);position:relative;overflow:hidden}
+.map::before{content:"Nadbystrzycka 20B · Lublin";position:absolute;inset:0;display:grid;place-items:center;font-family:var(--cond);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-mute);background:var(--paper-3) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2l2.6 6.7L22 9.3l-5.5 4.7L18.2 21 12 17.3 5.8 21l1.7-7L2 9.3l7.4-.6z' fill='%23b8a27a' fill-opacity='.35'/%3E%3C/svg%3E") center 38%/120px no-repeat}
+.map iframe{position:relative;z-index:1;width:100%;height:100%;border:0;filter:grayscale(1) sepia(.5) contrast(1.05) brightness(.95);transition:filter .5s var(--ease)}
+.map .map-open{position:absolute;right:14px;bottom:14px;z-index:2;display:inline-flex;align-items:center;gap:8px;font-family:var(--cond);font-weight:600;font-size:12px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink);background:var(--amber);border:2px solid var(--ink);padding:8px 12px;box-shadow:3px 3px 0 var(--ink)}
+.map .map-open:hover{background:var(--amber-2)}
+.map:hover iframe{filter:none}
+.map .map-tag{position:absolute;left:14px;bottom:14px;z-index:2;background:var(--cream);border:2px solid var(--ink);padding:8px 12px;font-family:var(--cond);font-size:12px;letter-spacing:.14em;text-transform:uppercase;box-shadow:3px 3px 0 var(--ink);pointer-events:none}
+@media (max-width:860px){.visit{grid-template-columns:1fr}.map{aspect-ratio:4/3;min-height:0}}
+
+/* ---------- footer ---------- */
+footer{padding:48px 0 32px;border-top:2px solid var(--amber)}
+footer .wrap{display:grid;grid-template-columns:auto 1fr auto;gap:26px;align-items:center}
+footer .links{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;list-style:none}
+footer .links a{font-family:var(--cond);font-size:13px;letter-spacing:.16em;text-transform:uppercase;text-decoration:none;color:rgba(246,237,219,.7)}
+footer .links a:hover{color:var(--amber)}
+footer .soc{display:flex;gap:12px}
+footer .soc a{display:grid;place-items:center;width:42px;height:42px;border:1.5px solid rgba(246,237,219,.3);color:var(--paper);transition:border-color .2s,color .2s}
+footer .soc a:hover{border-color:var(--amber);color:var(--amber)}
+footer .soc svg{width:18px;height:18px;fill:currentColor}
+footer .fine{grid-column:1/-1;margin-top:18px;padding-top:18px;border-top:1px solid var(--line-dark);font-size:13px;color:rgba(246,237,219,.5);display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+@media (max-width:760px){footer .wrap{grid-template-columns:1fr;text-align:center}footer .soc{justify-content:center}footer .fine{justify-content:center;text-align:center}}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .rv{opacity:1;transform:none;transition:none}
+  .ticker-track{animation:none!important}
+}
+</style>
+</head>
+<body>
+<div class="photowall" id="photowall" aria-hidden="true">
+  <picture>
+    <source media="(max-width:700px)" srcset="assets/hero-butelki-m.jpg">
+    <img class="on" src="assets/hero-butelki.jpg" alt="" width="1600" height="1957" fetchpriority="high" decoding="async">
+  </picture>
+</div>
+<div class="demo-tag" aria-label="Wersja demonstracyjna">Demo · projekt strony</div>
+<div class="lamp" id="lamp" aria-hidden="true"><i class="warm"></i><i class="dim"></i></div>
+
+<header class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Kozzak — strona główna">
+      <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.7L22 9.3l-5.5 4.7L18.2 21 12 17.3 5.8 21l1.7-7L2 9.3l7.4-.6z" fill="currentColor"/></svg>
+      KOZZAK
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#wanted">Karta</a></li>
+      <li><a href="#kolo">Koło</a></li>
+      <li><a href="#kuchnia">Kuchnia</a></li>
+      <li><a href="#wieczor">Wieczór</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#eventy">Eventy</a></li>
+      <li><a href="#wizyta">Wizyta</a></li>
+      <li class="m-only"><a class="m-tel" href="tel:+48881234244">☎ 881 234 244</a></li>
+    </ul>
+    <a class="nav-cta" href="tel:+48881234244">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+      881 234 244
+    </a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav-links"><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ================= HERO ================= -->
+<section class="hero dark" aria-label="Wstęp">
+  <div class="ghost-word" aria-hidden="true">SALOON</div>
+  <div class="wrap">
+    <div class="poster">
+      <span class="nail tl"></span><span class="nail tr"></span><span class="nail bl"></span><span class="nail br"></span>
+      <p class="eyebrow">Saloon &amp; Cocktail Bar · Lublin</p>
+      <h1 class="wordmark">KOZZAK</h1>
+      <p class="tag">Koktajle · Pizza · Bilard · do 2:30</p>
+      <p class="lead">Dziki Zachód zaparkował na Nadbystrzyckiej. Ciemny kamień, lampy naftowe, pianino w rogu i barman, który wie, co robi.</p>
+      <div class="status" id="status" role="status" aria-live="polite"><span class="dot"></span><span class="t">Sprawdzam godziny…</span></div>
+      <div class="cta">
+        <a class="btn" href="tel:+48881234244">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+          Zarezerwuj stolik
+        </a>
+        <a class="btn ghost" href="#wanted">Zobacz kartę
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </div>
+      <p class="foot">Nadbystrzycka 20B · 5 min pieszo od Politechniki</p>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Koktajle autorskie</span><span>Pizza z pieca</span><span>Burgery</span><span>Bilard</span><span>Rzutki</span><span>Konsole</span><span>Shisha</span><span>Piwo z kranu</span><span>Pt–Sb do 2:30</span><span>Bar mobilny na eventy</span>
+    <span>Koktajle autorskie</span><span>Pizza z pieca</span><span>Burgery</span><span>Bilard</span><span>Rzutki</span><span>Konsole</span><span>Shisha</span><span>Piwo z kranu</span><span>Pt–Sb do 2:30</span><span>Bar mobilny na eventy</span>
+  </div>
+</div>
+
+<!-- ================= REASONS ================= -->
+<section class="paper to-p3" id="skrot" aria-labelledby="h-skrot">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">W skrócie</p>
+      <h2 class="title" id="h-skrot">Trzy powody</h2>
+      <div class="rule" aria-hidden="true">★</div>
+    </div>
+    <div class="reasons">
+      <div class="stub rv" data-d="1">
+        <div class="num">4,9<small>/ 5</small></div>
+        <h3>287 opinii w Google</h3>
+        <p>Średnia 4,9 z prawie trzystu ocen. Nie my to mówimy — mówią to ludzie, którzy siedzieli przy tym barze.</p>
+      </div>
+      <div class="stub rv" data-d="2">
+        <div class="num">02:30</div>
+        <h3>W piątki i soboty</h3>
+        <p>Kiedy inni gaszą światło, u nas dopiero robi się ciekawie. W tygodniu do północy.</p>
+      </div>
+      <div class="stub rv" data-d="3">
+        <div class="num">5<small>min</small></div>
+        <h3>Pieszo od Politechniki</h3>
+        <p>Nadbystrzycka 20B. Parking pod nosem, ogródek latem, zamówienie online, kiedy nie chce Ci się wychodzić.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WANTED ================= -->
+<section class="paper p3 from-paper fade-b" id="wanted" aria-labelledby="h-wanted">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Karta · Poszukiwani</p>
+      <h2 class="title" id="h-wanted">Wanted</h2>
+      <p class="sub">Sześciu najbardziej poszukiwanych. Pełna lista gończa — u barmana. Za każdego wyznaczono nagrodę.</p>
+    </div>
+    <div class="filters rv" role="group" aria-label="Filtruj kartę">
+      <button class="chip" data-f="all" aria-pressed="true">Wszyscy</button>
+      <button class="chip" data-f="klasyk" aria-pressed="false">Klasyki</button>
+      <button class="chip" data-f="autorski" aria-pressed="false">Autorskie</button>
+      <button class="chip" data-f="zero" aria-pressed="false">Bez alkoholu</button>
+    </div>
+
+    <div class="wall" id="wall">
+      <article class="wp rv" data-cat="klasyk" style="--tilt:-1.6deg" data-d="1">
+        <span class="nail"></span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M14 12h52L40 46z"/><path d="M40 46v36M22 88h36"/><path d="M26 22h28"/><circle cx="34" cy="30" r="1.4" fill="currentColor"/><circle cx="40" cy="27" r="1.4" fill="currentColor"/><circle cx="46" cy="30" r="1.4" fill="currentColor"/></svg></div>
+        <h3>Espresso Martini</h3>
+        <p class="charge">Za kradzież snu. Działa po północy.</p>
+        <p class="desc">wódka · espresso · likier kawowy</p>
+        <div class="reward"><span>Nagroda</span><b>32 zł</b></div>
+      </article>
+
+      <article class="wp rv" data-cat="klasyk" style="--tilt:1.2deg" data-d="2">
+        <span class="nail"></span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M18 14h44l-4 74H22z"/><path d="M20 40h40"/><path d="M30 52h12v12H30z"/><path d="M44 58h10v10H44z"/><circle cx="58" cy="16" r="9"/><path d="M58 7v18M49 16h18"/></svg></div>
+        <h3>Whiskey Sour</h3>
+        <p class="charge">Za kwaśną minę, która szybko mija.</p>
+        <p class="desc">bourbon · cytryna · białko · angostura</p>
+        <div class="reward"><span>Nagroda</span><b>30 zł</b></div>
+      </article>
+
+      <article class="wp rv" data-cat="autorski" style="--tilt:-.8deg" data-d="3">
+        <span class="nail"></span>
+        <span class="badge">Autorski</span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M16 22h40v58a6 6 0 0 1-6 6H22a6 6 0 0 1-6-6z"/><path d="M56 34h6a8 8 0 0 1 0 16h-6"/><path d="M16 22l6-10h28l6 10"/><path d="M24 36l16 10M28 32l16 10"/><path d="M40 12c0-6 12-6 12 0" /></svg></div>
+        <h3>Kozzak Mule</h3>
+        <p class="charge">Za kopnięcie muła. Świadków wielu.</p>
+        <p class="desc">wódka · imbir · limonka · ginger beer</p>
+        <div class="reward"><span>Nagroda</span><b>29 zł</b></div>
+      </article>
+
+      <article class="wp rv" data-cat="klasyk" style="--tilt:1.5deg" data-d="1">
+        <span class="nail"></span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M18 20h44l-3 66H21z"/><path d="M28 50h24v24H28z"/><path d="M28 50l24 24"/><path d="M52 14c8 4 10 12 6 18"/><path d="M30 34h20"/></svg></div>
+        <h3>Old Fashioned</h3>
+        <p class="charge">Poszukiwany od 1880 roku. Wciąż na wolności.</p>
+        <p class="desc">bourbon · cukier · bitters · pomarańcza</p>
+        <div class="reward"><span>Nagroda</span><b>34 zł</b></div>
+      </article>
+
+      <article class="wp rv" data-cat="autorski" style="--tilt:-1.3deg" data-d="2">
+        <span class="nail"></span>
+        <span class="badge">Autorski</span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M40 14c-16 0-24 12-24 24s10 20 24 20 24-8 24-20-8-24-24-24z"/><path d="M40 58v28M26 88h28"/><path d="M22 36h36"/><path d="M48 8l6 10M54 8l-6 10" /><circle cx="32" cy="46" r="1.4" fill="currentColor"/><circle cx="42" cy="50" r="1.4" fill="currentColor"/></svg></div>
+        <h3>Saloon Spritz</h3>
+        <p class="charge">Za zamieszanie na tarasie w lipcu.</p>
+        <p class="desc">aperol · prosecco · grejpfrut · rozmaryn</p>
+        <div class="reward"><span>Nagroda</span><b>31 zł</b></div>
+      </article>
+
+      <article class="wp rv" data-cat="zero" style="--tilt:.9deg" data-d="3">
+        <span class="nail"></span>
+        <span class="badge">0% alkoholu</span>
+        <div class="w"><small>Poszukiwany</small>WANTED</div>
+        <div class="art" aria-hidden="true"><svg viewBox="0 0 80 100"><path d="M20 14h40l-3 72H23z"/><path d="M22 40h36"/><path d="M40 40l14-30"/><path d="M30 50c4 8 16 8 20 0"/><path d="M30 62c4 8 16 8 20 0"/><path d="M28 30c6-8 8-10 12-12"/></svg></div>
+        <h3>Szeryf 0%</h3>
+        <p class="charge">Za prowadzenie. Wyłącznie trzeźwe.</p>
+        <p class="desc">marakuja · limonka · mięta · soda</p>
+        <div class="reward"><span>Nagroda</span><b>18 zł</b></div>
+      </article>
+    </div>
+
+    <p class="also rv">Na barze także: <b>piwo z kranu</b> (Zwierzyniec Witbier) · <b>whisky</b> · <b>shoty</b> · <b>szarlotka</b></p>
+  </div>
+</section>
+
+<!-- ================= WHEEL ================= -->
+<section class="dark veil-t veil-b" id="kolo" style="--vct:214,195,156;--vcb:236,223,196" aria-labelledby="h-kolo">
+  <div class="wrap">
+    <div class="wheel-grid">
+      <div class="wheel-box rv" id="wheel-box">
+        <svg viewBox="0 0 600 600" id="wheel-svg" role="img" aria-label="Koło fortuny z koktajlami">
+          <defs>
+            <radialGradient id="hub" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#f4c46e"/><stop offset="1" stop-color="#8a5418"/></radialGradient>
+            <linearGradient id="rim" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3b2a1c"/><stop offset="1" stop-color="#1d140c"/></linearGradient>
+          </defs>
+          <circle cx="300" cy="300" r="286" fill="url(#rim)" stroke="#0e0906" stroke-width="4"/>
+          <circle cx="300" cy="300" r="272" fill="none" stroke="#e9a53b" stroke-width="2" opacity=".6"/>
+          <g id="wheel-g"></g>
+          <g id="pegs"></g>
+          <circle cx="300" cy="300" r="46" fill="url(#hub)" stroke="#0e0906" stroke-width="3"/>
+          <path d="M300 276l6.8 14.2 15.6 2-11.4 10.8 2.9 15.4L300 311l-13.9 7.4 2.9-15.4-11.4-10.8 15.6-2z" fill="#16110d"/>
+          <path d="M300 62l-18-40h36z" fill="#e9a53b" stroke="#0e0906" stroke-width="3" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="wheel-side rv" data-d="1">
+        <p class="eyebrow">Koło fortuny</p>
+        <h2 class="title" id="h-kolo">Nie wiesz,<br>co wybrać?</h2>
+        <p class="sub">Zakręć. Koło jest uczciwe, barman też. Co wypadnie — to pijesz. Reklamacje przyjmujemy przy trzecim.</p>
+        <button class="btn" id="spin">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>
+          Zakręć kołem
+        </button>
+        <div class="result" id="result" aria-live="polite">
+          <p class="k">Koło zdecydowało</p>
+          <h3 id="r-name">—</h3>
+          <p class="q" id="r-q"></p>
+          <p class="d" id="r-d"></p>
+          <p class="p" id="r-p"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KITCHEN ================= -->
+<section class="paper fade-t fade-b" id="kuchnia" aria-labelledby="h-kuchnia">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Kuchnia</p>
+      <h2 class="title" id="h-kuchnia">Saloon karmi</h2>
+      <p class="sub">Pizza z pieca, burgery i wszystko, co pasuje do drugiego koktajlu. Na miejscu albo z dostawą.</p>
+    </div>
+    <div class="board-wrap rv">
+    <div class="board">
+      <div>
+        <h3>Pizza</h3>
+        <p class="hint">z pieca, ciasto dojrzewa 48 h</p>
+        <ul>
+          <li><span class="n">Margherita</span><span class="l"></span><span class="p">28</span></li>
+          <li><span class="n">Diavola</span><span class="l"></span><span class="p">34</span></li>
+          <li><span class="n">Kozzak BBQ <span class="tag">hit</span></span><span class="l"></span><span class="p">36</span></li>
+          <li><span class="n">Prosciutto &amp; rukola</span><span class="l"></span><span class="p">37</span></li>
+          <li><span class="n">Quattro formaggi</span><span class="l"></span><span class="p">35</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Burgery</h3>
+        <p class="hint">wołowina 180 g, bułka maślana</p>
+        <ul>
+          <li><span class="n">Classic</span><span class="l"></span><span class="p">32</span></li>
+          <li><span class="n">Saloon Bacon <span class="tag">hit</span></span><span class="l"></span><span class="p">36</span></li>
+          <li><span class="n">Chili Outlaw</span><span class="l"></span><span class="p">35</span></li>
+          <li><span class="n">Veggie</span><span class="l"></span><span class="p">31</span></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Do tego</h3>
+        <p class="hint">bo jeden drink to za mało</p>
+        <ul>
+          <li><span class="n">Frytki</span><span class="l"></span><span class="p">12</span></li>
+          <li><span class="n">Krążki cebulowe</span><span class="l"></span><span class="p">14</span></li>
+          <li><span class="n">Nachos z salsą</span><span class="l"></span><span class="p">22</span></li>
+          <li><span class="n">Skrzydełka BBQ</span><span class="l"></span><span class="p">26</span></li>
+        </ul>
+      </div>
+    </div>
+    <figure class="pol l kpol" style="--tilt:5deg">
+      <span class="pin"></span>
+      <div class="ph"><img src="assets/burgery.jpg" alt="Dwa burgery, koszyk frytek i piwo na barze" loading="lazy" width="1400" height="1050"></div>
+      <figcaption>Burgery, frytki, zimne piwo</figcaption>
+    </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EVENING ================= -->
+<section class="dark veil-t veil-b" id="wieczor" style="--vct:236,223,196;--vcb:214,195,156" aria-labelledby="h-wieczor">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Po godzinach</p>
+      <h2 class="title" id="h-wieczor">Wieczór trwa dłużej</h2>
+      <p class="sub">Koktajl to dopiero początek. Zostań na jedną partię — zwykle robią się z tego trzy.</p>
+    </div>
+    <div class="evening rv">
+      <div class="ev">
+        <div class="i">№ 01</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="18" cy="30" r="9"/><circle cx="18" cy="30" r="3"/><path d="M26 22L44 6"/><path d="M41 5l3 3"/></svg>
+        <h3>Bilard</h3><p>Stół czeka. Przegrany stawia kolejkę — to stara saloonowa zasada.</p>
+      </div>
+      <div class="ev">
+        <div class="i">№ 02</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="11"/><circle cx="24" cy="24" r="4"/><path d="M24 24L40 8"/><path d="M36 8h4v4"/></svg>
+        <h3>Rzutki</h3><p>Tarcza w rogu. Celuj ostrożnie — sąsiedni stolik zna Cię z widzenia.</p>
+      </div>
+      <div class="ev">
+        <div class="i">№ 03</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="14" width="40" height="22" rx="8"/><path d="M14 22v8M10 26h8"/><circle cx="33" cy="23" r="1.6" fill="currentColor"/><circle cx="38" cy="27" r="1.6" fill="currentColor"/></svg>
+        <h3>Konsole</h3><p>Kanapa, pad i rewanż, którego domagasz się od zeszłego piątku.</p>
+      </div>
+      <div class="ev">
+        <div class="i">№ 04</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M20 42h8M24 42V24"/><path d="M16 24h16l-3-8h-10z"/><path d="M22 16V8h4v8"/><path d="M32 22c8 0 10 6 10 14"/></svg>
+        <h3>Shisha</h3><p>Powoli, długo i w dobrym towarzystwie. Smaki zmieniają się co sezon.</p>
+      </div>
+      <div class="ev">
+        <div class="i">№ 05</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 18h36v22H6z"/><path d="M6 18l6-8h24l6 8"/><path d="M12 18v10M18 18v10M24 18v10M30 18v10M36 18v10"/></svg>
+        <h3>Pianino</h3><p>Stoi w rogu i czeka. Kto zagra — ten dostaje uśmiech barmana, a czasem coś więcej.</p>
+      </div>
+      <div class="ev">
+        <div class="i">№ 06</div>
+        <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40h32"/><path d="M12 40V22l12-14 12 14v18"/><path d="M20 40v-8h8v8"/><path d="M4 22l20-16 20 16"/></svg>
+        <h3>Ogródek</h3><p>Latem stoliki wychodzą na zewnątrz. Spritz smakuje wtedy inaczej.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="paper p3 fade-t to-paper" id="galeria" aria-labelledby="h-galeria">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Migawki</p>
+      <h2 class="title" id="h-galeria">Na ścianie</h2>
+      <p class="sub">Zdjęcia z Google Maps i Instagrama — nasze i gości.</p>
+    </div>
+    <div class="pols">
+      <figure class="pol l rv" style="--tilt:-2.5deg" data-d="1">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/pianino.jpg" alt="Pianino i drewniane krzesła przy kamiennym barze" loading="lazy" width="1000" height="750"></div>
+        <figcaption>Pianino w rogu</figcaption>
+      </figure>
+      <figure class="pol p rv" style="--tilt:2deg" data-d="2">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/shoty.jpg" alt="Rząd shotów na barze" loading="lazy" width="1000" height="1333"></div>
+        <figcaption>Kolejka na stół</figcaption>
+      </figure>
+      <figure class="pol p rv" style="--tilt:-1.5deg" data-d="3">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/neon-shisha.jpg" alt="Neonowe skrzydła i shisha" loading="lazy" width="1000" height="1333"></div>
+        <figcaption>Neon, skrzydła i shisha</figcaption>
+      </figure>
+      <figure class="pol p rv" style="--tilt:1.8deg" data-d="1">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/espresso-martini.jpg" alt="Dwa espresso martini na barze" loading="lazy" width="1000" height="1333"></div>
+        <figcaption>Espresso martini × 2</figcaption>
+      </figure>
+      <figure class="pol l rv" style="--tilt:-2deg" data-d="2">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/bar-lampa.jpg" alt="Bar z lampą naftową i kartą na stole" loading="lazy" width="1000" height="750"></div>
+        <figcaption>Lampy naftowe, prawdziwe</figcaption>
+      </figure>
+      <figure class="pol p rv" style="--tilt:2.4deg" data-d="3">
+        <span class="pin"></span>
+        <div class="ph"><img src="assets/ig-teczowy-drink.webp" alt="Tęczowy long drink z plastrem pomarańczy" loading="lazy" width="1080" height="1440"></div>
+        <figcaption>Tęcza w szklance</figcaption>
+      </figure>
+    </div>
+    <p class="gal-more rv"><a href="https://www.instagram.com/kozzak_cocktail_bar/" target="_blank" rel="noopener">Więcej na Instagramie →</a></p>
+  </div>
+</section>
+
+<!-- ================= EVENTS ================= -->
+<section class="paper from-p3 fade-b" id="eventy" aria-labelledby="h-eventy">
+  <div class="wrap">
+    <div class="ticket rv">
+      <div class="stubcol">
+        <img src="assets/sala-pietro.jpg" srcset="assets/sala-pietro-m.jpg 700w, assets/sala-pietro.jpg 1200w" sizes="(max-width:700px) 100vw, 200px" alt="Nakryty stół w sali na piętrze" loading="lazy" width="1200" height="1600">
+        <span class="v">Bar mobilny</span>
+      </div>
+      <div class="body">
+        <p class="eyebrow">Kozzak Midnight Mixology</p>
+        <h2 class="title" id="h-eventy">Bar przyjeżdża<br>do Ciebie</h2>
+        <p>Doświadczenie zza baru na Nadbystrzyckiej przenosimy tam, gdzie dzieje się Twoje wydarzenie. Autorskie menu koktajlowe pod charakter imprezy, zespół barmanów, kompletne zaplecze. Województwo lubelskie i dalej — pytaj.</p>
+        <p>Wolisz u nas? Sala na piętrze mieści 25–30 osób — urodziny, integracje firmowe, szkolenia i spotkania biznesowe. Kameralnie, z barem pod ręką.</p>
+        <div class="list" aria-label="Rodzaje wydarzeń">
+          <span>Wesela</span><span>Jubileusze</span><span>Eventy firmowe</span><span>Konferencje</span><span>Gale</span><span>Premiery</span><span>Imprezy prywatne</span><span>Sala na piętrze · do 30 osób</span>
+        </div>
+        <div class="cta">
+          <a class="btn" href="mailto:kozzakclub@gmail.com?subject=Bar%20mobilny%20%E2%80%93%20zapytanie%20o%20ofert%C4%99">Zapytaj o ofertę</a>
+          <a class="btn ghost" href="tel:+48881234244">881 234 244</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="dark veil-t veil-b" id="opinie" style="--vct:236,223,196;--vcb:236,223,196" aria-labelledby="h-opinie">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Telegramy od gości</p>
+      <h2 class="title" id="h-opinie">Słowo się rozeszło</h2>
+    </div>
+    <div class="score rv">
+      <b>4,9</b>
+      <div><div class="stars" aria-label="Pięć gwiazdek">★★★★★</div>287 opinii w Google</div>
+    </div>
+    <div class="tg">
+      <article class="tele rv" style="--tilt:-.8deg" data-d="1">
+        <div class="head"><b>Telegram</b><span>Lublin · stop</span></div>
+        <blockquote>Najlepszy bar w Lublinie. Pyszne drinki, cudowna obsługa, świetna pizza.</blockquote>
+        <p class="who"><span class="s">★★★★★</span>Opinia Google</p>
+      </article>
+      <article class="tele rv" style="--tilt:.6deg" data-d="2">
+        <div class="head"><b>Telegram</b><span>Lublin · stop</span></div>
+        <blockquote>Klimat westernowy, kowbojki na ścianach. Osiem drinków na stół — w tym bezalkoholowe dla kierowcy — i żaden nie zawiódł.</blockquote>
+        <p class="who"><span class="s">★★★★★</span>Opinia Google</p>
+      </article>
+      <article class="tele rv" style="--tilt:-.5deg" data-d="3">
+        <div class="head"><b>Telegram</b><span>Lublin · stop</span></div>
+        <blockquote>Miejsce, które od pierwszej wizyty czuje się jak swoje. Koktajle najlepsze, jakie piłem.</blockquote>
+        <p class="who"><span class="s">★★★★★</span>Opinia Google</p>
+      </article>
+    </div>
+    <p class="rev-more rv"><a href="https://maps.app.goo.gl/2dnpKhH7CZmpwCqL9" target="_blank" rel="noopener">Wszystkie 287 opinii w Google →</a></p>
+  </div>
+</section>
+
+<!-- ================= VISIT ================= -->
+<section class="paper fade-t" id="wizyta" aria-labelledby="h-wizyta">
+  <div class="wrap">
+    <div class="visit">
+      <div class="rv">
+        <p class="eyebrow">Wizyta</p>
+        <h2 class="title" id="h-wizyta">Wpadnij</h2>
+        <div class="status" id="status2" role="status"><span class="dot"></span><span class="t">Sprawdzam godziny…</span></div>
+        <ul class="hours" id="hours">
+          <li data-d="1" class="off"><span>Poniedziałek</span><span class="h">zamknięte</span></li>
+          <li data-d="2" class="off"><span>Wtorek</span><span class="h">zamknięte</span></li>
+          <li data-d="3"><span>Środa</span><span class="h">18:00 – 00:00</span></li>
+          <li data-d="4"><span>Czwartek</span><span class="h">18:00 – 00:00</span></li>
+          <li data-d="5"><span>Piątek</span><span class="h">18:00 – 02:30</span></li>
+          <li data-d="6"><span>Sobota</span><span class="h">18:00 – 02:30</span></li>
+          <li data-d="0"><span>Niedziela</span><span class="h">18:00 – 00:00</span></li>
+        </ul>
+        <div class="addr">
+          <div class="row">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <div><span class="lbl">Adres</span><a href="https://maps.app.goo.gl/2dnpKhH7CZmpwCqL9" target="_blank" rel="noopener">Nadbystrzycka 20B, 20-506 Lublin</a></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>
+            <div><span class="lbl">Rezerwacje</span><a href="tel:+48881234244">881 234 244</a></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg>
+            <div><span class="lbl">Eventy</span><a href="mailto:kozzakclub@gmail.com">kozzakclub@gmail.com</a></div>
+          </div>
+          <div class="row">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+            <div><span class="lbl">Instagram</span><a href="https://www.instagram.com/kozzak_cocktail_bar/" target="_blank" rel="noopener">@kozzak_cocktail_bar</a></div>
+          </div>
+        </div>
+      </div>
+      <div class="map rv" data-d="1">
+        <iframe title="Mapa — Kozzak Cocktail Bar, Nadbystrzycka 20B, Lublin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Kozzak%20Cocktail%20Bar%2C%20Nadbystrzycka%2020B%2C%20Lublin&z=16&hl=pl&output=embed"></iframe>
+        <div class="map-tag">Nadbystrzycka 20B</div>
+        <a class="map-open" href="https://maps.app.goo.gl/2dnpKhH7CZmpwCqL9" target="_blank" rel="noopener">Otwórz w Google Maps ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="dark">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.6 6.7L22 9.3l-5.5 4.7L18.2 21 12 17.3 5.8 21l1.7-7L2 9.3l7.4-.6z" fill="currentColor"/></svg>
+      KOZZAK
+    </a>
+    <ul class="links">
+      <li><a href="#wanted">Karta</a></li>
+      <li><a href="#kolo">Koło</a></li>
+      <li><a href="#kuchnia">Kuchnia</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#eventy">Eventy</a></li>
+      <li><a href="#wizyta">Wizyta</a></li>
+    </ul>
+    <div class="soc">
+      <a href="https://www.instagram.com/kozzak_cocktail_bar/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3c1.3-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z"/></svg></a>
+      <a href="https://www.facebook.com/KozzakClub/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M13.5 22v-8.2h2.8l.4-3.3h-3.2V8.4c0-.9.3-1.6 1.6-1.6h1.7V3.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.3v3.3h2.8V22z"/></svg></a>
+    </div>
+    <div class="fine">
+      <span>Kozzak Cocktail Bar · Nadbystrzycka 20B, 20-506 Lublin · Strona demonstracyjna — pozycje i ceny w karcie przykładowe, zdjęcia z Google Maps i Instagrama baru (do podmiany na własne).</span>
+      <span>Projekt: Gajewski &amp; Goljanek, 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const rmq = matchMedia('(prefers-reduced-motion: reduce)');
+  const body = document.body;
+  if (!rmq.matches) body.classList.add('motion'); else body.classList.add('rm');
+
+  /* ---------- nav ---------- */
+  const nav = $('#nav'), burger = $('#burger');
+  burger.addEventListener('click', () => {
+    const open = nav.classList.toggle('open');
+    burger.setAttribute('aria-expanded', String(open));
+    body.style.overflow = open ? 'hidden' : '';
+  });
+  $$('#nav-links a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); body.style.overflow = '';
+  }));
+  const onScroll = () => nav.classList.toggle('solid', scrollY > 40);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* ---------- lamp following the pointer over dark sections ---------- */
+  const lamp = $('#lamp');
+  const fine = matchMedia('(pointer:fine)').matches;
+  if (fine && !rmq.matches) {
+    let tx = innerWidth / 2, ty = innerHeight * .3, x = tx, y = ty, raf = 0;
+    const step = () => {
+      x += (tx - x) * .12; y += (ty - y) * .12;
+      lamp.style.transform = `translate(${x}px,${y}px)`;
+      if (Math.abs(tx - x) > .5 || Math.abs(ty - y) > .5) raf = requestAnimationFrame(step); else raf = 0;
+    };
+    addEventListener('pointermove', e => {
+      tx = e.clientX; ty = e.clientY;
+      const onDark = !!e.target.closest('.dark'), onPaper = !onDark && !!e.target.closest('.paper');
+      lamp.classList.toggle('on-dark', onDark); lamp.classList.toggle('on-paper', onPaper);
+      if (!raf) raf = requestAnimationFrame(step);
+    }, { passive: true });
+    addEventListener('pointerleave', () => lamp.classList.remove('on-dark', 'on-paper'));
+  }
+
+  /* ---------- photo wall: crossfade behind the dark sections ---------- */
+  const WALL = [
+    ['assets/wall-bar-lampa.jpg', 'assets/wall-bar-lampa-m.jpg'],
+    ['assets/ig-cheers.webp'],
+    ['assets/wall-neon.jpg', 'assets/wall-neon-m.jpg'],
+    ['assets/wall-pianino.jpg', 'assets/wall-pianino-m.jpg'],
+    ['assets/ig-koktajl-splash.webp'],
+    ['assets/ig-teczowy-drink.webp'],
+  ];
+  // Only local files from assets/ may be loaded dynamically. Absolute URLs, protocol-relative URLs,
+  // other hosts, data:/javascript: schemes and path traversal are rejected before they reach the DOM.
+  const ASSET_RE = /^assets\/[a-z0-9][a-z0-9-]*\.(?:jpe?g|webp|png|avif)$/i;
+  const localAsset = p => (typeof p === 'string' && ASSET_RE.test(p) && !p.includes('..')) ? p : null;
+  const wall = $('#photowall'), wallImgs = [$('img', wall)];
+  if (!rmq.matches) {
+    const small = innerWidth < 700;
+    const addRest = () => WALL.forEach(w => {
+      const src = localAsset((small && w[1]) ? w[1] : w[0]);
+      if (!src) return;
+      const im = new Image(); im.alt = ''; im.decoding = 'async'; im.src = src;
+      wall.appendChild(im); wallImgs.push(im);
+    });
+    if (document.readyState === 'complete') setTimeout(addRest, 1200); else addEventListener('load', () => setTimeout(addRest, 1200), { once: true });
+    let wi = 0;
+    setInterval(() => {
+      if (document.hidden || wallImgs.length < 2) return;
+      const next = wallImgs[(wi + 1) % wallImgs.length];
+      if (!next.complete || !next.naturalWidth) return;
+      const prev = wallImgs[wi]; wi = (wi + 1) % wallImgs.length;
+      next.classList.add('on'); prev.classList.remove('on'); prev.classList.add('out');
+      setTimeout(() => prev.classList.remove('out'), 2700);
+    }, 8000);
+  }
+
+  /* ---------- reveal ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px', threshold: .08 });
+  $$('.rv').forEach(el => {
+    if (el.getBoundingClientRect().top < innerHeight * .9) el.classList.add('in'); else io.observe(el);
+  });
+
+  /* ---------- opening hours (Europe/Warsaw) ---------- */
+  const HOURS = { 0: [18, 24], 1: null, 2: null, 3: [18, 24], 4: [18, 24], 5: [18, 26.5], 6: [18, 26.5] };
+  const DAY_ACC = ['w niedzielę', 'w poniedziałek', 'we wtorek', 'w środę', 'w czwartek', 'w piątek', 'w sobotę'];
+  const WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const fmt = v => { const h = Math.floor(v) % 24, m = Math.round((v - Math.floor(v)) * 60); return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`; };
+  const nowWarsaw = () => {
+    try {
+      const p = new Intl.DateTimeFormat('en-GB', { timeZone: 'Europe/Warsaw', weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false }).formatToParts(new Date());
+      const g = t => p.find(x => x.type === t).value;
+      let h = parseInt(g('hour'), 10); if (h === 24) h = 0;
+      return { day: WD.indexOf(g('weekday')), t: h + parseInt(g('minute'), 10) / 60 };
+    } catch { const d = new Date(); return { day: d.getDay(), t: d.getHours() + d.getMinutes() / 60 }; }
+  };
+  const status = () => {
+    const { day, t } = nowWarsaw();
+    const prev = HOURS[(day + 6) % 7];
+    if (prev && prev[1] > 24 && t < prev[1] - 24) return { open: true, text: `Otwarte · zamykamy o ${fmt(prev[1])}`, day };
+    const td = HOURS[day];
+    if (td && t >= td[0] && t < td[1]) return { open: true, text: `Otwarte · zamykamy o ${fmt(td[1])}`, day };
+    if (td && t < td[0]) return { open: false, text: `Zamknięte · otwieramy dziś o ${fmt(td[0])}`, day };
+    for (let i = 1; i <= 7; i++) { const d = (day + i) % 7; if (HOURS[d]) return { open: false, text: `Zamknięte · otwieramy ${i === 1 ? 'jutro' : DAY_ACC[d]} o ${fmt(HOURS[d][0])}`, day }; }
+    return { open: false, text: 'Zamknięte', day };
+  };
+  const paintStatus = () => {
+    const s = status();
+    $$('.status').forEach(el => { el.classList.toggle('open', s.open); el.classList.toggle('closed', !s.open); $('.t', el).textContent = s.text; });
+    $$('#hours li').forEach(li => li.classList.toggle('today', +li.dataset.d === s.day));
+  };
+  paintStatus(); setInterval(paintStatus, 60000);
+
+  /* ---------- polaroids: tap toggles colour on touch screens ---------- */
+  if (matchMedia('(hover:none)').matches) $$('.pol, .ticket').forEach(p => p.addEventListener('click', e => { if (!e.target.closest('a')) p.classList.toggle('on'); }));
+
+  /* ---------- wanted filters ---------- */
+  const chips = $$('.chip'), posters = $$('.wp');
+  chips.forEach(c => c.addEventListener('click', () => {
+    chips.forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    const f = c.dataset.f;
+    posters.forEach(p => { const show = f === 'all' || p.dataset.cat === f; p.classList.toggle('hide', !show); if (show) p.classList.add('in'); });
+  }));
+
+  /* ---------- wheel of fortune ---------- */
+  const WHEEL = [
+    { n: 'Espresso Martini', d: 'wódka · espresso · likier kawowy', q: 'Za kradzież snu. Działa po północy.', p: '32 zł' },
+    { n: 'Whiskey Sour', d: 'bourbon · cytryna · białko · angostura', q: 'Za kwaśną minę, która szybko mija.', p: '30 zł' },
+    { n: 'Kozzak Mule', d: 'wódka · imbir · limonka · ginger beer', q: 'Za kopnięcie muła. Świadków wielu.', p: '29 zł' },
+    { n: 'Old Fashioned', d: 'bourbon · cukier · bitters · pomarańcza', q: 'Poszukiwany od 1880 roku. Wciąż na wolności.', p: '34 zł' },
+    { n: 'Saloon Spritz', d: 'aperol · prosecco · grejpfrut · rozmaryn', q: 'Za zamieszanie na tarasie w lipcu.', p: '31 zł' },
+    { n: 'Szeryf 0%', d: 'marakuja · limonka · mięta · soda', q: 'Za prowadzenie. Wyłącznie trzeźwe.', p: '18 zł' },
+    { n: 'Szarlotka', d: 'żubrówka · sok jabłkowy · cynamon', q: 'Za to, że smakuje jak u babci. Prawie.', p: '24 zł' },
+    { n: 'Barman wybiera', d: 'powiedz tylko: słodko, kwaśno czy mocno', q: 'Zaufaj. On wie, czego dziś potrzebujesz.', p: 'cena wg wyboru' },
+  ];
+  const NS = 'http://www.w3.org/2000/svg';
+  const g = $('#wheel-g'), pegs = $('#pegs');
+  const N = WHEEL.length, SEG = 360 / N, CX = 300, CY = 300, R = 266;
+  const FILLS = ['#ecdfc4', '#e9a53b', '#ecdfc4', '#9a3a20'];
+  const pt = (deg, r) => { const a = (deg - 90) * Math.PI / 180; return [CX + r * Math.cos(a), CY + r * Math.sin(a)]; };
+  WHEEL.forEach((w, i) => {
+    const a0 = i * SEG, a1 = a0 + SEG, [x0, y0] = pt(a0, R), [x1, y1] = pt(a1, R);
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d', `M${CX} ${CY} L${x0.toFixed(2)} ${y0.toFixed(2)} A${R} ${R} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z`);
+    path.setAttribute('fill', FILLS[i % FILLS.length]);
+    path.setAttribute('stroke', '#0e0906'); path.setAttribute('stroke-width', '2.5');
+    g.appendChild(path);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('class', 'seg-label' + (FILLS[i % FILLS.length] === '#9a3a20' ? ' light' : ''));
+    t.setAttribute('text-anchor', 'middle');
+    t.setAttribute('dominant-baseline', 'middle');
+    const left = a0 + SEG / 2 > 180;
+    t.setAttribute('transform', `rotate(${a0 + SEG / 2} ${CX} ${CY}) translate(${CX} ${CY - 160}) rotate(${left ? 90 : -90})`);
+    t.textContent = w.n;
+    g.appendChild(t);
+    const [px, py] = pt(a0, 278);
+    const peg = document.createElementNS(NS, 'circle');
+    peg.setAttribute('cx', px.toFixed(2)); peg.setAttribute('cy', py.toFixed(2)); peg.setAttribute('r', '5');
+    peg.setAttribute('fill', '#e9a53b'); peg.setAttribute('stroke', '#0e0906'); peg.setAttribute('stroke-width', '1.5');
+    pegs.appendChild(peg);
+  });
+
+  const spinBtn = $('#spin'), result = $('#result');
+  let rot = 0, spinning = false;
+  const showResult = w => {
+    $('#r-name').textContent = w.n; $('#r-q').textContent = w.q; $('#r-d').textContent = w.d; $('#r-p').textContent = w.p;
+    result.classList.add('show');
+    if (innerWidth < 900) result.scrollIntoView({ behavior: rmq.matches ? 'auto' : 'smooth', block: 'nearest' });
+    spinBtn.querySelector('svg').nextSibling.textContent = ' Zakręć jeszcze raz';
+  };
+  spinBtn.addEventListener('click', () => {
+    if (spinning) return;
+    spinning = true; result.classList.remove('show'); spinBtn.setAttribute('aria-disabled', 'true');
+    const i = Math.floor(Math.random() * N);
+    const center = i * SEG + SEG / 2;
+    const jitter = (Math.random() - .5) * SEG * .55;
+    const target = ((360 - center + jitter) % 360 + 360) % 360;
+    const cur = ((rot % 360) + 360) % 360;
+    const delta = ((target - cur) % 360 + 360) % 360;
+    rot += 360 * (rmq.matches ? 1 : 5) + delta;
+    g.style.transform = `rotate(${rot}deg)`;
+    const done = () => { spinning = false; spinBtn.removeAttribute('aria-disabled'); showResult(WHEEL[i]); };
+    g.addEventListener('transitionend', done, { once: true });
+    setTimeout(() => { if (spinning) { g.removeEventListener('transitionend', done); done(); } }, rmq.matches ? 700 : 5200);
+  });
+})();
+</script>
+</body>
+</html>

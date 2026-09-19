@@ -1,0 +1,14 @@
+# Nagłówki bezpieczeństwa dla hostingu Apache/LiteSpeed (np. Hostinger).
+# CSP jest w <meta> w index.html (razem z hashem skryptu) — tu tylko reszta.
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+</IfModule>
+# Bez listowania katalogów i bez dostępu do plików pomocniczych
+Options -Indexes
+<FilesMatch "^(SECURITY\.md|\.htaccess)$">
+  Require all denied
+</FilesMatch>
